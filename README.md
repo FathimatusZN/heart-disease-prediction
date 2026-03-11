@@ -73,10 +73,8 @@ heart-disease-prediction/
 │   └── heart_disease_prediction.ipynb      # Notebook utama (full pipeline)
 │
 ├── data/
-│   ├── raw/
-│   │   └── heart.csv                       # Dataset original dari Kaggle
-│   └── processed/
-│       └── arm_dataset.csv                 # Dataset pasien high-risk untuk ARM
+│   └── raw/
+│       └── heart_failure_dataset.csv       # Dataset original dari Kaggle
 │
 ├── models/
 │   ├── best_classification_model.pkl       # Model Random Forest terbaik
@@ -94,11 +92,10 @@ heart-disease-prediction/
 │   └── final_report.txt                    # Laporan akhir teks
 │
 ├── reports/
-│   └── paper.pdf                           # Paper/laporan ilmiah proyek
+│   └── FP DM Kel 13.pdf                    # Paper/laporan ilmiah proyek
 │
 ├── requirements.txt                        # Daftar dependensi Python
-├── README.md                               # Dokumentasi ini
-└── .gitignore                              # File yang diabaikan Git
+└── README.md                               # Dokumentasi ini
 ```
 
 ---
@@ -109,20 +106,20 @@ heart-disease-prediction/
 Dataset (918 pasien)
         │
         ▼
-┌──────────────────────────┐
-│  1. Data Understanding   │  EDA, distribusi, korelasi, outlier detection
-└──────────────────────────┘
+┌────────────────────────┐
+│  1. Data Understanding │  EDA, distribusi, korelasi, outlier detection
+└────────────────────────┘
         │
         ▼
-┌────────────────────────────────────┐
-│  2. Data Preparation (Klasifikasi) │
-│  • Handle invalid values           │  Cholesterol=0 → impute median
-│  • Outlier capping (IQR)           │
-│  • Feature engineering             │  5 fitur kategorikal baru
-│  • Encoding (Label/OHE/Ordinal)    │
-│  • Train-Test Split (80:20)        │
-│  • StandardScaler                  │
-└────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│  2. Data Preparation (Klasifikasi)  │
+│  • Handle invalid values            │  Cholesterol=0 → impute median
+│  • Outlier capping (IQR)            │
+│  • Feature engineering              │  5 fitur kategorikal baru
+│  • Encoding (Label/OHE/Ordinal)     │
+│  • Train-Test Split (80:20)         │
+│  • StandardScaler                   │
+└─────────────────────────────────────┘
         │
         ▼
 ┌───────────────────────────────────┐
@@ -135,71 +132,70 @@ Dataset (918 pasien)
 └───────────────────────────────────┘
         │
         ▼
-┌─────────────────────────────────────┐
-│  4. Data Preparation (ARM)          │
-│  • Identifikasi pasien high-risk    │  Pred=1 & Confidence ≥ 70%
-│  • Transformasi ke format kategoris │  → 423 pasien, 282 transaksi bersih
-│  • TransactionEncoder               │
-└─────────────────────────────────────┘
+┌────────────────────────────────────┐
+│  4. Data Preparation (ARM)         │
+│  • Identifikasi pasien high-risk   │  Pred=1 & Confidence ≥ 70%
+│  • Transformasi ke format kategoris│  → 423 pasien, 282 transaksi bersih
+│  • TransactionEncoder              │
+└────────────────────────────────────┘
         │
         ▼
-┌─────────────────────────────────┐
-│  5. Association Rule Mining     │
-│  • Apriori (min_support=0.1)    │  → 1.960 frequent itemsets
-│  • Generate rules               │  → 1.598 rules (conf≥0.6, lift≥1.2)
-│  • Clinical interpretation      │
-└─────────────────────────────────┘
+┌────────────────────────────────┐
+│  5. Association Rule Mining    │
+│  • Apriori (min_support=0.1)   │  → 1.960 frequent itemsets
+│  • Generate rules              │  → 1.598 rules (conf≥0.6, lift≥1.2)
+│  • Clinical interpretation     │
+└────────────────────────────────┘
         │
         ▼
-┌───────────────────────────────┐
-│  6. Analysis & Reporting      │
-│  • Business objectives check  │
-│  • Key insights               │
-│  • Clinical recommendations   │
-└───────────────────────────────┘
+┌─────────────────────────────┐
+│  6. Analysis & Reporting     │
+│  • Business objectives check │
+│  • Key insights              │
+│  • Clinical recommendations  │
+└─────────────────────────────┘
 ```
 
 ---
 
 ## 🚀 Cara Menjalankan
 
-### 1. Clone Repositori
-```bash
-git clone https://github.com/FathimatusZN/heart-disease-prediction.git
-cd heart-disease-prediction
-```
+Notebook ini dibuat dan dijalankan menggunakan **Google Colab**.
 
-### 2. Install Dependensi
+### 1. Buka Notebook di Colab
+Klik tombol di bawah atau buka langsung file `notebooks/heart_disease_prediction.ipynb` dari repo ini di Google Colab.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FathimatusZN/heart-disease-prediction/blob/main/notebooks/heart_disease_prediction.ipynb)
+
+### 2. Install Dependensi Tambahan
+Library berikut sudah di-install otomatis di dalam notebook:
 ```bash
-pip install -r requirements.txt
+!pip install -q kagglehub
+!pip install -q mlxtend
 ```
+Library lainnya (`numpy`, `pandas`, `matplotlib`, `seaborn`, `scikit-learn`) sudah tersedia secara default di Colab.
 
 ### 3. Download Dataset
-Dataset diunduh otomatis melalui `kagglehub` di dalam notebook. Pastikan Kaggle API credentials sudah dikonfigurasi, atau unduh manual dari [sini](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction) dan letakkan di `data/raw/heart.csv`.
+Dataset diunduh otomatis melalui `kagglehub` di dalam notebook. Atau unduh manual dari [sini](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction) dan letakkan di `data/raw/heart_failure_dataset.csv`.
 
-### 4. Jalankan Notebook
-```bash
-jupyter notebook notebooks/heart_disease_prediction.ipynb
-```
+### 4. Jalankan Semua Cell
+Pilih **Runtime → Run all** di menu Colab.
 
-> **Catatan:** GridSearchCV pada Random Forest menguji 576 kombinasi parameter × 5-fold CV = 2.880 fits. Proses ini membutuhkan waktu beberapa menit tergantung spesifikasi hardware.
+> **Catatan:** GridSearchCV pada Random Forest menguji 576 kombinasi parameter × 5-fold CV = 2.880 fits. Proses ini membutuhkan waktu beberapa menit.
 
 ---
 
 ## 📦 Dependensi
 
-```
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
-mlxtend
-kagglehub
-jupyter
-```
+| Library | Keterangan |
+|---------|-----------|
+| `numpy`, `pandas` | Manipulasi data |
+| `matplotlib`, `seaborn` | Visualisasi |
+| `scikit-learn` | Model ML & preprocessing |
+| `mlxtend` | Apriori & TransactionEncoder |
+| `kagglehub` | Download dataset dari Kaggle |
 
-Lihat `requirements.txt` untuk versi lengkap.
+> `numpy`, `pandas`, `matplotlib`, `seaborn`, dan `scikit-learn` sudah pre-installed di Google Colab. Hanya `mlxtend` dan `kagglehub` yang perlu di-install manual.
 
 ---
 
