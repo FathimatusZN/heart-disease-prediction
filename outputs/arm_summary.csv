@@ -1,0 +1,11 @@
+,Value
+Total High-Risk Patients,282.0
+Frequent Itemsets Found,1960.0
+Association Rules Generated,1598.0
+Min Support,0.1
+Min Confidence,0.6
+Min Lift,1.2
+Avg Support,0.13138320063199568
+Avg Confidence,0.7302972120854094
+Avg Lift,1.2843816719412866
+Max Lift,1.653958944281525

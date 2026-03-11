@@ -1,1 +1,9 @@
-
+Metric,Value
+Dataset Size,918 patients
+Disease Prevalence,55.3%
+Best Model,Random Forest
+F1-Score,0.9163
+AUC-ROC,0.9481
+High-Risk Patients,423 (46.1%)
+Association Rules,1598 rules
+Status,Success
