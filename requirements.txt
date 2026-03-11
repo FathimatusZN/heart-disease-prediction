@@ -1,0 +1,16 @@
+# Core
+numpy
+pandas
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+
+# Association Rule Mining
+mlxtend
+
+# Dataset download (Kaggle)
+kagglehub
